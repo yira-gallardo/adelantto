@@ -1,0 +1,42 @@
+.contacto {
+  margin-top: 4rem;
+  padding: 8rem;
+  text-align: center;
+  background: linear-gradient(
+    to bottom,
+    var(--color-white) 0%,
+    var(--color-white) 70%,
+    var(--color-gray) 100%
+  );
+  .contactoForm {
+    max-width: 500px;
+    margin: 2rem auto;
+    text-align: left;
+    .contactoFormCheckbox {
+      margin: 1rem 0;
+      input {
+        margin-right: 1rem;
+      }
+    }
+    .contactoFormInputBox {
+      margin: 1rem 0;
+      input {
+        width: 100%;
+        padding: 1rem;
+        font-size: 1rem;
+        margin: 0.5rem 0;
+        border: 1px solid var(--color-secondary);
+        border-radius: 5px;
+        &::placeholder {
+          font-size: 1rem;
+        }
+      }
+    }
+    .contactoFormButton {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 2rem 0;
+    }
+  }
+}

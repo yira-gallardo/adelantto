@@ -1,0 +1,33 @@
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 900;
+  .navDesktopContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2rem;
+    padding: 1rem 0;
+    .navLogoImg {
+      width: 200px;
+      height: auto;
+    }
+    .navLinks {
+      display: flex;
+      column-gap: 2rem;
+      align-items: center;
+      .navLink {
+        color: var(--color-secondary);
+        font-weight: bold;
+        text-decoration: none;
+        transition-duration: 0.2s;
+        &:hover {
+          transition-duration: 0.2s;
+          color: var(--color-primary);
+        }
+      }
+    }
+  }
+}

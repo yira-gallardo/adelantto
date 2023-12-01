@@ -1,0 +1,275 @@
+.hero {
+  margin-top: 10rem;
+  background: linear-gradient(
+    to bottom,
+    var(--color-white) 0%,
+    var(--color-white) 80%,
+    var(--color-gray) 100%
+  );
+  .heroContainer {
+    display: flex;
+    align-items: center;
+    column-gap: 4rem;
+    .heroText {
+      width: 60%;
+      display: flex;
+      flex-direction: column;
+      row-gap: 2rem;
+    }
+    .heroImage {
+      font-size: 0;
+      width: 40%;
+      .heroImageImg {
+        width: 100%;
+        height: auto;
+      }
+    }
+    .heroButtons {
+      display: flex;
+      column-gap: 1rem;
+    }
+  }
+}
+
+.info {
+  .infoContainer {
+    display: flex;
+    align-items: center;
+    column-gap: 8rem;
+    padding: 8rem 0 2rem 0;
+    .infoText {
+      width: 70%;
+      .steps {
+        margin: 4rem 0;
+        .step {
+          display: flex;
+          column-gap: 2rem;
+          align-items: center;
+          margin: 2rem 0;
+          .stepNumber {
+            width: 50px;
+            height: 50px;
+            color: var(--color-white);
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            background-color: var(--color-blue);
+          }
+        }
+      }
+    }
+    .infoImage {
+      font-size: 0;
+      width: 30%;
+      .infoImageImg {
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+  .infoIconsContainer {
+    padding: 4rem 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: center;
+    column-gap: 4rem;
+    align-items: center;
+    .infoIcon {
+      display: flex;
+      align-items: center;
+      column-gap: 1rem;
+      .line {
+        width: 5px;
+        height: 50px;
+        background-color: var(--color-primary);
+      }
+      .iconImg {
+        width: 120px;
+        height: auto;
+      }
+    }
+  }
+}
+
+.calculator {
+  text-align: center;
+  padding: 8rem 0;
+  background: linear-gradient(
+    to bottom,
+    var(--color-white) 0%,
+    var(--color-white) 70%,
+    var(--color-gray) 100%
+  );
+  .calculatorText {
+    max-width: 1000px;
+    margin: auto;
+  }
+  .calculatorComponent {
+    margin: 4rem 0;
+    .calculatorForm {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      .calculatorInput {
+        width: 500px;
+        padding: 1rem;
+        margin: 0.8rem 0;
+        text-align: center;
+        box-shadow: inset 0px 3px 6px #00000029;
+        border: none;
+        border-radius: 15px;
+        font-size: 1rem;
+        font-weight: bold;
+        &::placeholder {
+          font-size: 1rem;
+        }
+      }
+      .calculatorOptions {
+        width: 500px;
+        display: flex;
+        justify-content: space-between;
+        margin: 0.5rem 0;
+        .calculatorOption {
+          width: 50px;
+          height: 50px;
+          box-shadow: inset 0px 3px 6px #00000029;
+          border: none;
+          border-radius: 15px;
+          font-size: 1rem;
+          font-weight: bold;
+          cursor: pointer;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          &.active {
+            background-color: var(--color-primary);
+            color: var(--color-white);
+          }
+        }
+      }
+    }
+  }
+}
+
+.about {
+  padding: 4rem 0;
+  .aboutContainer1 {
+    display: flex;
+    align-items: center;
+    column-gap: 8rem;
+    .aboutText {
+      width: 45%;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      row-gap: 2rem;
+    }
+    .aboutImage {
+      font-size: 0;
+      width: 55%;
+      .aboutImageImg {
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+  .aboutContainer2 {
+    padding: 4rem 0;
+    .aboutText {
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      row-gap: 2rem;
+    }
+  }
+  .aboutContainer3 {
+    margin-top: -15rem;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    column-gap: 8rem;
+    .aboutImage {
+      font-size: 0;
+      width: 55%;
+      .aboutImageImg {
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+}
+
+.reviews {
+  padding: 8rem 0;
+  background: linear-gradient(
+    to bottom,
+    var(--color-white) 0%,
+    var(--color-white) 50%,
+    var(--color-gray) 100%
+  );
+  .reviewsContainer {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+    .line {
+      width: 600px;
+      height: 5px;
+      background-color: var(--color-primary);
+    }
+    .reviewsSlider {
+      margin: 4rem 0;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      column-gap: 8rem;
+      .reviewsSliderItem {
+        display: flex;
+        align-items: center;
+        column-gap: 2rem;
+        .reviewsSliderItemPhoto {
+          width: 30%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          .reviewsSliderItemPhotoImg {
+            position: relative;
+            z-index: 900;
+            width: 150%;
+            height: auto;
+          }
+        }
+        .reviewsSliderItemText {
+          background-color: white;
+          border-radius: 15px;
+          padding: 2rem;
+          box-shadow: 6px 7px 20px 5px rgba(0, 0, 0, 0.18);
+          -webkit-box-shadow: 6px 7px 20px 5px rgba(0, 0, 0, 0.18);
+          -moz-box-shadow: 6px 7px 20px 5px rgba(0, 0, 0, 0.18);
+          text-align: center;
+          width: 70%;
+          .reviewsSliderItemStars {
+            display: flex;
+            justify-content: center;
+          }
+        }
+      }
+    }
+    .download {
+      text-align: center;
+      .buttons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        column-gap: 1rem;
+        margin: 2rem 0;
+      }
+    }
+  }
+}

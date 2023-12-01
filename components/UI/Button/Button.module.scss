@@ -1,0 +1,22 @@
+.button {
+  cursor: pointer;
+  background-color: var(--color-primary);
+  color: white;
+  border: none;
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: bold;
+  border: 2px solid var(--color-primary);
+  transition-duration: 0.2s;
+  max-width: 300px;
+  &:hover {
+    transition-duration: 0.2s;
+    background-color: transparent;
+    color: var(--color-primary);
+    border: 2px solid var(--color-primary);
+  }
+  &.large {
+    font-size: 1rem;
+    padding: 0.8rem 2rem;
+  }
+}
