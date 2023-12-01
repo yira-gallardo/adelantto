@@ -11,4 +11,10 @@
   &.large {
     font-size: 1.6rem;
   }
+  &.white {
+    color: var(--color-white);
+  }
+  &.gray {
+    color: gray;
+  }
 }

@@ -7,6 +7,7 @@ import Paragraph from "@/components/UI/Paragraph/Paragraph";
 import Image from "next/image";
 import Link from "next/link";
 import Button from "@/components/UI/Button/Button";
+import Footer from "@/components/Layout/Footer/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -480,6 +481,7 @@ export default function Home() {
             </div>
           </div>
         </section>
+        <Footer />
       </main>
     </>
   );
