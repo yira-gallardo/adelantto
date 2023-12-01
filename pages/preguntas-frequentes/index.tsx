@@ -171,6 +171,7 @@ export default function PreguntasFrequentes() {
                 <Paragraph>{topicContent.subtitle}</Paragraph>
                 {topicContent.preguntas.map((i) => (
                   <div
+                    key={Math.random()}
                     className={styles.preguntasInfoContentItem}
                     onClick={() => handlePreguntaClick(i)}
                   >
