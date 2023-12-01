@@ -2,10 +2,21 @@ import Link from "next/link";
 import styles from "./Nav.module.scss";
 import Image from "next/image";
 import Button from "@/components/UI/Button/Button";
+import { useEffect, useState } from "react";
 
 export default function Nav() {
+  const [scrolled, setScrolled] = useState<boolean>(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 90);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <div className={styles.nav}>
+    <div className={`${styles.nav} ${scrolled ? styles.navScrolled : ""}`}>
       <div className="container">
         <div className={styles.navDesktopContainer}>
           <div className={styles.navLogo}>
