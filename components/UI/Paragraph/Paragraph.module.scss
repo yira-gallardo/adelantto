@@ -1,0 +1,14 @@
+.paragraph {
+  line-height: 1.5;
+  color: var(--color-secondary);
+  font-weight: 400;
+  &.small {
+    font-size: 0.8rem;
+  }
+  &.medium {
+    font-size: 1.2rem;
+  }
+  &.large {
+    font-size: 1.6rem;
+  }
+}
