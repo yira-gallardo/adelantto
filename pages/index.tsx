@@ -9,6 +9,7 @@ import Link from "next/link";
 import Button from "@/components/UI/Button/Button";
 import Footer from "@/components/Layout/Footer/Footer";
 import { motion } from "framer-motion";
+import Calculator from "@/components/Calculator/Calculator";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -200,59 +201,7 @@ export default function Home() {
               viewport={{ once: true }}
               transition={{ duration: 0.7 }}
             >
-              <div className={styles.calculatorContainer}>
-                <div className={styles.calculatorText}>
-                  <Title semantic="h3" size="large">
-                    <b>Calcula el monto de tu Adelantto</b>
-                  </Title>
-                  <Paragraph size="medium">
-                    Ingresa el monto de tu renta mensual y conoce en cuestión de
-                    segundos hasta cuanto podrías recibir como préstamo.{" "}
-                    <b>¡Descarga Adelantto hoy!</b>
-                  </Paragraph>
-                </div>
-                <div className={styles.calculatorComponent}>
-                  <form className={styles.calculatorForm}>
-                    <input
-                      type="text"
-                      className={styles.calculatorInput}
-                      placeholder="Valor de tu renta mensual"
-                    />
-                    <input
-                      type="text"
-                      className={styles.calculatorInput}
-                      placeholder="Fecha de inicio del contrato de arrendamiento"
-                    />
-                    <input
-                      type="text"
-                      className={styles.calculatorInput}
-                      placeholder="Fecha de fin del contrato de arrendamiento"
-                    />
-                    <Paragraph size="medium">
-                      <b>¿Cuántos meses de Adelantto necesitas?</b>
-                    </Paragraph>
-                    <div className={styles.calculatorOptions}>
-                      <div
-                        className={`${styles.calculatorOption} ${styles.active}`}
-                      >
-                        1
-                      </div>
-                      <div className={styles.calculatorOption}>2</div>
-                      <div className={styles.calculatorOption}>3</div>
-                      <div className={styles.calculatorOption}>4</div>
-                      <div className={styles.calculatorOption}>5</div>
-                      <div className={styles.calculatorOption}>6</div>
-                    </div>
-                    <input
-                      type="text"
-                      className={styles.calculatorInput}
-                      placeholder="Monto pre aprobado por Adelantto"
-                      disabled
-                    />
-                    <Button size="large">Inicia tu proceso</Button>
-                  </form>
-                </div>
-              </div>
+              <Calculator />
             </motion.div>
           </div>
         </section>
