@@ -5,19 +5,103 @@ import Title from "../UI/Title/Title";
 import styles from "./Calculator.module.scss";
 import CurrencyInput from "react-currency-input-field";
 
+const MONTHS_OPTIONS = [
+  {
+    name: "1",
+    isActive: false,
+  },
+  {
+    name: "2",
+    isActive: false,
+  },
+  {
+    name: "3",
+    isActive: false,
+  },
+  {
+    name: "4",
+    isActive: false,
+  },
+  {
+    name: "5",
+    isActive: false,
+  },
+  {
+    name: "6",
+    isActive: false,
+  },
+];
+
 export default function Calculator() {
+  const [monthsOptions, setMonthsOptions] = useState(MONTHS_OPTIONS);
   const [rent, setRent] = useState<number>(0);
-  const [startDate, setStartDate] = useState<Date>(new Date());
-  const [endDate, setEndDate] = useState<Date>(new Date());
-  const [months, setMonths] = useState<number>(1);
+  const [startDate, setStartDate] = useState<Date>();
+  const [endDate, setEndDate] = useState<Date>();
+  const [months, setMonths] = useState<string>("1");
+  const [monthsAllowed, setMonthsAllowed] = useState<number>(0);
+  const [monthsDifference, setMonthsDifference] = useState<number>();
   const [result, setResult] = useState<number>(0);
+  const [error, setError] = useState<boolean>(false);
 
   useEffect(() => {
-    const result = rent * months;
-    setResult(result);
+    const result = rent * Number(months);
+    if (monthsDifference && monthsDifference > 2) {
+      setResult(result);
+    }
   }, [rent, months]);
 
-  console.log(rent, startDate, endDate, months);
+  useEffect(() => {
+    if (startDate) {
+      const today = new Date();
+      if (startDate > today) {
+        setStartDate(today);
+      }
+    }
+    if (endDate) {
+      const today = new Date();
+      if (endDate < today) {
+        setEndDate(today);
+      }
+    }
+    if (startDate && endDate) {
+      const monthDifference =
+        (endDate.getFullYear() - startDate.getFullYear()) * 12 +
+        (endDate.getMonth() - startDate.getMonth());
+      if (monthDifference > 2) {
+        setMonthsAllowed(monthDifference);
+      } else {
+        setMonthsAllowed(0);
+        setMonthsOptions(MONTHS_OPTIONS);
+        setResult(0);
+      }
+      setMonthsDifference(monthDifference);
+    }
+    if (monthsDifference && monthsDifference < 3) {
+      setError(true);
+    } else {
+      setError(false);
+    }
+  }, [startDate, endDate, monthsDifference]);
+
+  const monthsOptionsHandler = (months: string) => {
+    const newMonthsOptions = monthsOptions.map((option) => {
+      if (option.name === months) {
+        return {
+          ...option,
+          isActive: true,
+        };
+      } else {
+        return {
+          ...option,
+          isActive: false,
+        };
+      }
+    });
+    setMonthsOptions(newMonthsOptions);
+    setMonths(months);
+  };
+
+  // console.log(rent, startDate, endDate, months);
 
   return (
     <div className={styles.calculatorContainer}>
@@ -49,6 +133,7 @@ export default function Calculator() {
           <input
             type="date"
             className={styles.calculatorInput}
+            value={startDate ? startDate.toISOString().split("T")[0] : ""}
             onChange={(event) => setStartDate(new Date(event.target.value))}
           />
           <Paragraph size="medium">
@@ -62,56 +147,29 @@ export default function Calculator() {
           <Paragraph size="medium">
             <b>¿Cuántos meses de Adelantto necesitas?</b>
           </Paragraph>
+
           <div className={styles.calculatorOptions}>
-            <div
-              className={`${styles.calculatorOption} ${
-                months === 1 ? styles.active : ""
-              }`}
-              onClick={() => setMonths(1)}
-            >
-              1
-            </div>
-            <div
-              className={`${styles.calculatorOption} ${
-                months === 2 ? styles.active : ""
-              }`}
-              onClick={() => setMonths(2)}
-            >
-              2
-            </div>
-            <div
-              className={`${styles.calculatorOption} ${
-                months === 3 ? styles.active : ""
-              }`}
-              onClick={() => setMonths(3)}
-            >
-              3
-            </div>
-            <div
-              className={`${styles.calculatorOption} ${
-                months === 4 ? styles.active : ""
-              }`}
-              onClick={() => setMonths(4)}
-            >
-              4
-            </div>
-            <div
-              className={`${styles.calculatorOption} ${
-                months === 5 ? styles.active : ""
-              }`}
-              onClick={() => setMonths(5)}
-            >
-              5
-            </div>
-            <div
-              className={`${styles.calculatorOption} ${
-                months === 6 ? styles.active : ""
-              }`}
-              onClick={() => setMonths(6)}
-            >
-              6
-            </div>
+            {monthsOptions.map((option) => (
+              <button
+                key={option.name}
+                type="button"
+                className={`${styles.calculatorOption} ${
+                  option.isActive ? styles.active : ""
+                }`}
+                onClick={() => monthsOptionsHandler(option.name)}
+                disabled={Number(option.name) > monthsAllowed ? true : false}
+              >
+                {option.name}
+              </button>
+            ))}
           </div>
+          {error && (
+            <Paragraph size="small">
+              <b className="red">
+                Debes tener al menos 3 meses de contrato restantes
+              </b>
+            </Paragraph>
+          )}
           <Paragraph size="medium">
             <b>Monto pre aprobado por Adelantto</b>
           </Paragraph>

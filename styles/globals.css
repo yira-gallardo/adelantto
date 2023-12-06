@@ -111,3 +111,6 @@ h6 {
 .green {
   color: var(--color-primary);
 }
+.red {
+  color: red;
+}
