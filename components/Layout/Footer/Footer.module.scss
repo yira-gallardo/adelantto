@@ -90,3 +90,19 @@
     }
   }
 }
+
+@media (max-width: "1000px") {
+  .footer {
+    .topContent {
+      flex-direction: column;
+      row-gap: 2rem;
+    }
+    .bottom {
+      padding: 1rem;
+      .copyrightContent {
+        flex-direction: column;
+        row-gap: 1rem;
+      }
+    }
+  }
+}

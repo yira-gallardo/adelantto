@@ -64,3 +64,19 @@
     }
   }
 }
+
+@media (max-width: "1000px") {
+  .preguntas {
+    padding: 4rem;
+    .preguntasContent {
+      flex-direction: column;
+      row-gap: 2rem;
+      .preguntasTopics {
+        width: 100%;
+      }
+      .preguntasInfo {
+        width: 100%;
+      }
+    }
+  }
+}

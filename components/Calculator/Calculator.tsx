@@ -7,23 +7,7 @@ import CurrencyInput from "react-currency-input-field";
 
 const MONTHS_OPTIONS = [
   {
-    name: "1",
-    isActive: false,
-  },
-  {
-    name: "2",
-    isActive: false,
-  },
-  {
     name: "3",
-    isActive: false,
-  },
-  {
-    name: "4",
-    isActive: false,
-  },
-  {
-    name: "5",
     isActive: false,
   },
   {
@@ -100,8 +84,6 @@ export default function Calculator() {
     setMonthsOptions(newMonthsOptions);
     setMonths(months);
   };
-
-  // console.log(rent, startDate, endDate, months);
 
   return (
     <div className={styles.calculatorContainer}>

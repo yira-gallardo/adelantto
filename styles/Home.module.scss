@@ -273,3 +273,111 @@
     }
   }
 }
+
+@media (max-width: "1000px") {
+  .hero {
+    .heroContainer {
+      flex-direction: column;
+      row-gap: 4rem;
+      padding: 0 1rem;
+      .heroText {
+        width: 100%;
+      }
+      .heroImage {
+        width: 100%;
+      }
+    }
+  }
+  .info {
+    .infoContainer {
+      flex-direction: column;
+      row-gap: 4rem;
+      padding: 4rem 1rem;
+      .infoText {
+        width: 100%;
+      }
+      .infoImage {
+        width: 60%;
+      }
+    }
+    .infoIconsContainer {
+      grid-template-columns: repeat(1, 1fr);
+      padding: 0 2rem;
+    }
+    .infoText {
+      width: 70%;
+      .steps {
+        .step {
+          display: grid !important;
+          grid-template-columns: 10% 80%;
+          column-gap: 1rem !important;
+          .stepNumber {
+            width: 40px !important;
+            height: 40px !important;
+            font-size: 1rem !important;
+            display: flex !important;
+          }
+        }
+      }
+    }
+  }
+  .about {
+    .aboutContainer1 {
+      flex-direction: column;
+      row-gap: 4rem;
+      padding: 1rem 1rem;
+      .aboutText {
+        width: 100%;
+      }
+      .aboutImage {
+        width: 100%;
+      }
+    }
+    .aboutContainer2 {
+      flex-direction: column;
+      row-gap: 4rem;
+      padding: 4rem 1rem;
+      .aboutText {
+        width: 100%;
+      }
+    }
+    .aboutContainer3 {
+      flex-direction: column;
+      row-gap: 4rem;
+      padding: 4rem 1rem;
+      .aboutText {
+        width: 100%;
+      }
+      .aboutImage {
+        width: 100%;
+      }
+    }
+  }
+  .reviews {
+    .reviewsContainer {
+      padding: 0 1rem;
+      .line {
+        width: 90%;
+        height: 5px;
+        background-color: var(--color-primary);
+      }
+      .reviewsSlider {
+        grid-template-columns: repeat(1, 1fr);
+        row-gap: 2rem;
+        .reviewsSliderItem {
+          flex-direction: column;
+          row-gap: 2rem;
+          .reviewsSliderItemPhoto {
+            width: 100%;
+            .reviewsSliderItemPhotoImg {
+              width: 100%;
+            }
+          }
+          .reviewsSliderItemText {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}

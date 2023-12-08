@@ -27,7 +27,8 @@
       .calculatorOptions {
         width: 500px;
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
+        column-gap: 1rem;
         margin: 0.5rem 0;
         .calculatorOption {
           width: 50px;
@@ -45,6 +46,23 @@
             background-color: var(--color-primary);
             color: var(--color-white);
           }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: "1000px") {
+  .calculatorContainer {
+    .calculatorComponent {
+      width: 80%;
+      margin: 2rem auto;
+      .calculatorForm {
+        .calculatorInput {
+          width: 300px;
+        }
+        .calculatorOptions {
+          width: 300px;
         }
       }
     }
