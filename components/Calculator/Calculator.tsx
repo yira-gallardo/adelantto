@@ -17,59 +17,21 @@ const MONTHS_OPTIONS = [
 ];
 
 export default function Calculator() {
-  const [monthsOptions, setMonthsOptions] = useState(MONTHS_OPTIONS);
-  const [rent, setRent] = useState<number>(0);
-  const [startDate, setStartDate] = useState<Date>();
-  const [endDate, setEndDate] = useState<Date>();
-  const [months, setMonths] = useState<string>("1");
-  const [monthsAllowed, setMonthsAllowed] = useState<number>(0);
-  const [monthsDifference, setMonthsDifference] = useState<number>();
-  const [result, setResult] = useState<number>(0);
+  const [mesesOptions, setMesesOptions] = useState(MONTHS_OPTIONS);
+  const [renta, setRenta] = useState<number>(0);
+  const [fechaInicio, setFechaInicio] = useState<Date>();
+  const [fechaFinal, setFechaFinal] = useState<Date>();
+  const [meses, setMeses] = useState<number>(0);
+  const [diferenciaMeses, setDiferenciaMeses] = useState<number>(0);
+  const [pagos, setPagos] = useState<any>([]);
+  const [adelantto, setAdelantto] = useState<any>("");
   const [error, setError] = useState<boolean>(false);
+  const interes = meses === 3 ? 0.2 : 0.25;
+  const calculoActivo = diferenciaMeses && diferenciaMeses > 2;
 
-  useEffect(() => {
-    const result = rent * Number(months);
-    if (monthsDifference && monthsDifference > 2) {
-      setResult(result);
-    }
-  }, [rent, months]);
-
-  useEffect(() => {
-    if (startDate) {
-      const today = new Date();
-      if (startDate > today) {
-        setStartDate(today);
-      }
-    }
-    if (endDate) {
-      const today = new Date();
-      if (endDate < today) {
-        setEndDate(today);
-      }
-    }
-    if (startDate && endDate) {
-      const monthDifference =
-        (endDate.getFullYear() - startDate.getFullYear()) * 12 +
-        (endDate.getMonth() - startDate.getMonth());
-      if (monthDifference > 2) {
-        setMonthsAllowed(monthDifference);
-      } else {
-        setMonthsAllowed(0);
-        setMonthsOptions(MONTHS_OPTIONS);
-        setResult(0);
-      }
-      setMonthsDifference(monthDifference);
-    }
-    if (monthsDifference && monthsDifference < 3) {
-      setError(true);
-    } else {
-      setError(false);
-    }
-  }, [startDate, endDate, monthsDifference]);
-
-  const monthsOptionsHandler = (months: string) => {
-    const newMonthsOptions = monthsOptions.map((option) => {
-      if (option.name === months) {
+  const mesesHandler = (mesesClickeados: string) => {
+    const newMesesOptions = mesesOptions.map((option) => {
+      if (option.name === mesesClickeados) {
         return {
           ...option,
           isActive: true,
@@ -81,9 +43,64 @@ export default function Calculator() {
         };
       }
     });
-    setMonthsOptions(newMonthsOptions);
-    setMonths(months);
+    setMesesOptions(newMesesOptions);
+    setMeses(Number(mesesClickeados));
   };
+
+  // Logica de negocio
+  useEffect(() => {
+    const fechaHoy = new Date();
+    if (fechaInicio) {
+      if (fechaInicio > fechaHoy) {
+        setFechaInicio(fechaHoy);
+      }
+    }
+    if (fechaFinal) {
+      if (fechaFinal < fechaHoy) {
+        setFechaFinal(fechaHoy);
+      }
+    }
+    if (fechaInicio && fechaFinal) {
+      const newDiferenciaMeses =
+        (fechaFinal.getFullYear() - fechaInicio.getFullYear()) * 12 +
+        (fechaFinal.getMonth() - fechaInicio.getMonth());
+      if (newDiferenciaMeses < 2) {
+        setMesesOptions(MONTHS_OPTIONS);
+        setAdelantto(0);
+      }
+      setDiferenciaMeses(newDiferenciaMeses);
+    }
+    if (diferenciaMeses && diferenciaMeses < 3) {
+      setError(true);
+    } else {
+      setError(false);
+    }
+  }, [fechaInicio, fechaFinal, diferenciaMeses]);
+
+  // Calculos
+  useEffect(() => {
+    if (calculoActivo) {
+      let total = renta * Number(meses);
+      const comision = total * 0.02;
+      const interesResult = interes / 12;
+      const pagosObj = [];
+
+      for (let i = 1; i <= meses; i++) {
+        const calculo = total * interesResult;
+        total = total - calculo;
+        pagosObj.push({
+          pago: total.toFixed(2),
+        });
+      }
+
+      const adelantto = (total - comision).toFixed(2);
+      setAdelantto(adelantto);
+      setPagos(pagosObj);
+    }
+  }, [calculoActivo, meses, renta]);
+
+  // Datos de todos los pagos acorde al excel
+  console.log("pagos", pagos);
 
   return (
     <div className={styles.calculatorContainer}>
@@ -106,7 +123,7 @@ export default function Calculator() {
             prefix="$"
             defaultValue={0}
             decimalsLimit={2}
-            onValueChange={(value) => setRent(Number(value))}
+            onValueChange={(value) => setRenta(Number(value))}
             className={styles.calculatorInput}
           />
           <Paragraph size="medium">
@@ -115,8 +132,8 @@ export default function Calculator() {
           <input
             type="date"
             className={styles.calculatorInput}
-            value={startDate ? startDate.toISOString().split("T")[0] : ""}
-            onChange={(event) => setStartDate(new Date(event.target.value))}
+            value={fechaInicio ? fechaInicio.toISOString().split("T")[0] : ""}
+            onChange={(event) => setFechaInicio(new Date(event.target.value))}
           />
           <Paragraph size="medium">
             <b>Fecha de fin del contrato de arrendamiento</b>
@@ -124,22 +141,22 @@ export default function Calculator() {
           <input
             type="date"
             className={styles.calculatorInput}
-            onChange={(event) => setEndDate(new Date(event.target.value))}
+            onChange={(event) => setFechaFinal(new Date(event.target.value))}
           />
           <Paragraph size="medium">
             <b>¿Cuántos meses de Adelantto necesitas?</b>
           </Paragraph>
 
           <div className={styles.calculatorOptions}>
-            {monthsOptions.map((option) => (
+            {mesesOptions.map((option) => (
               <button
                 key={option.name}
                 type="button"
                 className={`${styles.calculatorOption} ${
                   option.isActive ? styles.active : ""
                 }`}
-                onClick={() => monthsOptionsHandler(option.name)}
-                disabled={Number(option.name) > monthsAllowed ? true : false}
+                onClick={() => mesesHandler(option.name)}
+                disabled={!calculoActivo}
               >
                 {option.name}
               </button>
@@ -159,7 +176,7 @@ export default function Calculator() {
             prefix="$"
             defaultValue={0}
             decimalsLimit={2}
-            value={result}
+            value={adelantto ? adelantto : 0}
             onValueChange={(value, name) => console.log(value, name)}
             className={styles.calculatorInput}
             disabled
